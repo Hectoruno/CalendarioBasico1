@@ -1,18 +1,18 @@
 public class CalendarioBasico
 {
     // Declarando variables dia, mes y año
-    private int day;
-    private int month;
-    private int year;
+    private DisplayDosCaracteres day;
+    private DisplayDosCaracteres month;
+    private DisplayDosCaracteres year;
 
     /**
      * Constructor de la clase CalendarioBasico
      */ 
     public CalendarioBasico()
     {
-        day = 1;
-        month = 1;
-        year = 1;
+        day = new DisplayDosCaracteres(31);
+        month = new DisplayDosCaracteres(13);
+        year = new DisplayDosCaracteres(100);
     }
 
     /**
@@ -20,9 +20,9 @@ public class CalendarioBasico
      */
     public void fijarFecha(int dia, int mes, int ano)
     {
-        day = dia;
-        month = mes;
-        year = ano;
+        day.setValorAlmacenado(dia);
+        month.setValorAlmacenado(mes);
+        year.setValorAlmacenado(ano);
     }
 
     /**
@@ -30,22 +30,7 @@ public class CalendarioBasico
      */
     public String obtenerFecha()
     {
-        String textoADevolver = "";
-        String parte1 = day + "";
-        String parte2 = month + "";
-        String parte3 = year + "";
-        if (parte1.length() < 2) {
-            parte1 = "0" + parte1;  
-        }
-        if (month < 10) {
-            parte2 = "0" + parte2;
-        }
-        if (year < 10)
-            parte3= "0" + parte3; 
-        {
-            textoADevolver = parte1 + "-" + parte2 + "-" + parte3;
-            return textoADevolver;
-        }
+        return day.getTextoDelDisplay() + "-" + month.getTextoDelDisplay() + "-" + year.getTextoDelDisplay();
     }
 
     /**
@@ -53,13 +38,11 @@ public class CalendarioBasico
      */
     public void avanzarFecha()
     {
-        day = day + 1;
-        if (day == 31) {
-            day = 1;
-            month = month + 1;
-            if (month == 13) {
-                month = 1;
-                year = year + 1;
+        day.incrementaValorAlmacenado();
+        if (day.getValorAlmacenado() == 1){
+            month.incrementaValorAlmacenado();
+            if (month.getValorAlmacenado() == 1){
+                year.incrementaValorAlmacenado();
             }
         }
     }
